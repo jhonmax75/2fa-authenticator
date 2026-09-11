@@ -1,0 +1,21 @@
+# Gradle
+.gradle/
+build/
+**/build/
+
+# Kotlin
+.kotlin/
+
+# VS Code
+.vscode/
+
+# Android local configuration
+local.properties
+
+# JVM dumps
+*.hprof
+
+# Local signing credentials and keystore files
+keystore.properties
+*.jks
+*.keystore
