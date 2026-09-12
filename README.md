@@ -168,8 +168,6 @@ O APK será produzido em:
 app/build/outputs/apk/release/app-release.apk
 ```
 
-As senhas não devem ser colocadas neste README, no código-fonte ou em commits.
-
 ## Build de Release
 
 O Release utiliza otimização e redução de código:
