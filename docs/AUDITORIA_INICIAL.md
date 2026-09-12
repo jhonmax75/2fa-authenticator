@@ -36,6 +36,7 @@ O projeto já possui separação coerente entre UI, ViewModel, Repository, Room,
 | AUD-ARCH-03 | Atualização OTP | ViewModel recalcula estados em loop de um segundo | Comportamento funcional, porém refinável | Funcional / refinável | Baixo | P2 | Avaliar atualização alinhada ao ciclo do relógio TOTP | Atualizações ocorrem no instante necessário sem trabalho redundante |
 | AUD-PLAT-01 | Manifesto | `android.hardware.camera.any` está declarado sem `required="false"` | Dispositivos sem câmera podem ser impedidos de instalar o app | Decisão a revisar | Médio | P2 | Decidir se câmera é requisito obrigatório | Manifesto e política de distribuição refletem a decisão documentada |
 | AUD-REL-01 | Release | APK Release assinado foi gerado; R8 e redução de recursos estão configurados | A cadeia de build de Release foi validada | Validado | Alto | P0 | Repetir validações em processo reproduzível | APK é gerado, assinado e verificado em ambiente documentado |
+| AUD-VAL-01 | Validação externa TOTP | Configuração TOTP exportada da Binance foi reconstruída como URI `otpauth://`, sem registrar o segredo em texto na documentação, convertida em QR Code, importada e validada pela aceitação do código de 6 dígitos | O núcleo de parsing e geração TOTP funciona para a configuração validada | Validado | Alto | P1 | Investigar separadamente a captura do QR original da Binance | A configuração reconstruída produz um código TOTP aceito pela Binance no teste realizado |
 
 ## Evidências principais
 
@@ -51,6 +52,12 @@ O projeto já possui separação coerente entre UI, ViewModel, Repository, Room,
 - `TotpGenerator` usa HMAC-SHA1, 6 dígitos e período de 30 segundos.
 - `algorithm`, `digits` e `period` da URI ainda não fazem parte do domínio.
 - O decoder Base32 remove caracteres não permitidos em vez de rejeitá-los.
+
+### Validação externa com a Binance
+
+A configuração TOTP exportada da Binance foi reconstruída localmente como uma URI `otpauth://`, sem registrar o segredo em texto na documentação, convertida em QR Code e importada pelo aplicativo. O TOTP de 6 dígitos gerado pelo aplicativo foi aceito pela Binance.
+
+Essa evidência valida o núcleo funcional para a configuração testada: construção da URI, geração do QR Code, scanner, parsing e geração TOTP. O QR Code original apresentado pela Binance ainda deve ser investigado separadamente, e a validação não implica suporte completo a todos os parâmetros `otpauth://`.
 
 ### Interface e permissões
 

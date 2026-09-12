@@ -46,6 +46,12 @@ versionCode = 1
 
 A geração do APK não representa, por si só, validação para distribuição. Ainda são necessárias as validações descritas em [Limitações e trabalho em andamento](#limitações-e-trabalho-em-andamento).
 
+## Validação externa do TOTP
+
+O núcleo TOTP foi validado com uma configuração de produção da Binance. A configuração TOTP exportada foi reconstruída localmente como uma URI `otpauth://`, sem registrar o segredo em texto na documentação, convertida em QR Code e importada pelo aplicativo. O código de 6 dígitos gerado pelo aplicativo foi aceito pela Binance.
+
+Essa validação confirma o fluxo de parsing, geração do código e compatibilidade com a credencial utilizada. Ela não valida a captura do QR Code original apresentado pela Binance nem representa compatibilidade completa com todos os parâmetros possíveis de `otpauth://`.
+
 ## Tecnologias
 
 - Kotlin
